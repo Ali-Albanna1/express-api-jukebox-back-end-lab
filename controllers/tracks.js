@@ -35,6 +35,31 @@ router.get('/', async (req, res) => {
     }
 })
 
+// GET +/tracks/123
+router.get('/:id', async (req,res) => {
+    try{
+     const {id} = req.params
+
+      const track = await Track.findById(id)
+
+        if(!track) {
+
+        res.status(404).json({error: 'track not found'})
+
+        
+       }else{
+
+            res.status(200).json({track})
+       }
+
+    }catch(error){
+    
+        console.log(error)
+        res.status(500).json({error : 'failed to get track'})
+
+    }
+})
+
 
 
 
